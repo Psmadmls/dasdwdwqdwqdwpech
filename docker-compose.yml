@@ -1,0 +1,21 @@
+version: '3'
+services:
+  novnc:
+    image: thuonghai2711/ubuntu-novnc-pulseaudio:22.04
+    privileged: true
+    shm_size: 1g
+    ports:
+      - "8080:10000"
+      - "1699:1699"
+      - "6900:6900"
+      - "5900:5900"
+    environment:
+      VNC_PASSWD: "Preecha_0633"
+      PORT: "10000"
+      AUDIO_PORT: "1699"
+      WEBSOCKIFY_PORT: "6900"
+      VNC_PORT: "5900"
+      SCREEN_WIDTH: "1024"
+      SCREEN_HEIGHT: "768"
+      SCREEN_DEPTH: "24"
+    restart: unless-stopped
