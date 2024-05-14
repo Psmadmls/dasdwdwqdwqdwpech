@@ -1,21 +1,40 @@
-version: '3'
-services:
-  novnc:
-    image: thuonghai2711/ubuntu-novnc-pulseaudio:22.04
-    privileged: true
-    shm_size: 1g
-    ports:
-      - "8080:10000"
-      - "1699:1699"
-      - "6900:6900"
-      - "5900:5900"
-    environment:
-      VNC_PASSWD: "Preecha_0633"
-      PORT: "10000"
-      AUDIO_PORT: "1699"
-      WEBSOCKIFY_PORT: "6900"
-      VNC_PORT: "5900"
-      SCREEN_WIDTH: "1024"
-      SCREEN_HEIGHT: "768"
-      SCREEN_DEPTH: "24"
-    restart: unless-stopped
+# ใช้ base image จาก Ubuntu
+FROM ubuntu:latest
+
+# ตั้งค่า environment variables
+ENV DEBIAN_FRONTEND=noninteractive
+
+# อัปเดต package list และติดตั้งแพ็คเกจพื้นฐาน
+RUN apt-get update && \
+    apt-get install -y \
+    build-essential \
+    curl \
+    wget \
+    vim \
+    git \
+    && apt-get clean
+
+# คัดลอกไฟล์หรือไดเร็กทอรีจากเครื่อง host ไปยัง container
+# COPY <source> <destination>
+# ตัวอย่าง:
+# COPY . /app
+
+# เปลี่ยน directory ไปยัง /app
+# WORKDIR /app
+
+# สั่งรันคำสั่งเพิ่มเติม
+# ตัวอย่าง:
+# RUN make
+
+# เปิดพอร์ตที่ต้องการ
+# ตัวอย่าง:
+# EXPOSE 8080
+
+# สั่งให้ container รันคำสั่งเมื่อเริ่มต้น
+# CMD ["command", "parameter1", "parameter2"]
+# ตัวอย่าง:
+# CMD ["./your-program"]
+
+# หรือใช้ ENTRYPOINT แทน CMD ได้
+# ENTRYPOINT ["executable", "param1", "param2"]
+
